@@ -24,7 +24,7 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh'
             }
         }
-        stage ('Test'){
+        stage('Test Path') {
             steps {
                 sh 'pwd'
                 sh 'ls'
