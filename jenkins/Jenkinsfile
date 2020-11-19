@@ -50,21 +50,17 @@ pipeline {
     }
         stage ('pull artifact') {
         steps{
-            dir('java-app'){
-                def downloadArtifactory(String localPath, String repository, String remotePath) {
-                def downloadSpec = """{
-                    "files": [
-                            {
-                                "pattern": "wajahat/my-app-1.0-SNAPSHOT.jar",
-                                "target": "app"
-                            }
-                        ]
-                    }"""
-
-                echo "${downloadSpec}"
-
-            }
-        }
+            rtDownload (
+            serverId: "jenkins-artifactory",
+            spec: """{
+                "files": [
+                    {
+                    "pattern": "wajahat/my-app-1.0-SNAPSHOT.jar",
+                    "target": "app/"
+                    }
+                ]
+            }"""
+        )
         }
     }
  }
