@@ -33,7 +33,7 @@ pipeline {
                 spec: """{
                             "files": [
                                 {
-                                    "pattern": "$WORKSPACE/simple_java_app/target/my-app-1.0-SNAPSHOT.jar",
+                                    "pattern": "/target/my-app-1.0-SNAPSHOT.jar",
                                     "target": "wajahat/my-app-1.0-SNAPSHOT.jar",
                                     "recursive": "false"
                                 }
