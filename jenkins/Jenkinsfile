@@ -24,5 +24,23 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh'
             }
         }
+        stage ('Publish Artifacts') {
+        steps {
+            rtUpload (
+                buildName: JOB_NAME,
+                buildNumber: BUILD_NUMBER,
+                serverId: "jenkins-artifactory", // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
+                spec: """{
+                            "files": [
+                                {
+                                    "pattern": "$WORKSPACE/simple_java_app/target/my-app-1.0-SNAPSHOT.jar",
+                                    "target": "eurus-docker/my-app-1.0-SNAPSHOT.jar",
+                                    "recursive": "false"
+                                }
+                            ]
+                    }"""   
+                )
+        }
+    }
     }
 }
