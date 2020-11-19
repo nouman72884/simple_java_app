@@ -50,6 +50,7 @@ pipeline {
     }
         stage ('pull artifact') {
         steps{
+            dir('java') {
             rtDownload (
             serverId: "jenkins-artifactory",
             spec: """{
@@ -61,6 +62,7 @@ pipeline {
                 ]
             }"""
         )
+        }
         }
     }
  }
