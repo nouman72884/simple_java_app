@@ -50,19 +50,17 @@ pipeline {
     }
         stage ('pull artifact') {
         steps{
-            dir('java') {
             rtDownload (
             serverId: "jenkins-artifactory",
             spec: """{
                 "files": [
                     {
                     "pattern": "wajahat/my-app-1.0-SNAPSHOT.jar",
-                    "target": "."
+                    "target": "app/"
                     }
                 ]
             }"""
         )
-        }
         }
     }
  }
