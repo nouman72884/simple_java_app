@@ -27,7 +27,7 @@ pipeline {
         stage('Test Path') {
             steps {
                 sh 'pwd'
-                sh 'ls'
+                sh 'ls target/'
             }
         }
         stage ('Publish Artifacts') {
@@ -39,7 +39,7 @@ pipeline {
                 spec: """{
                             "files": [
                                 {
-                                    "pattern": "/target/my-app-1.0-SNAPSHOT.jar",
+                                    "pattern": "target/my-app-1.0-SNAPSHOT.jar",
                                     "target": "wajahat/my-app-1.0-SNAPSHOT.jar",
                                     "recursive": "false"
                                 }
