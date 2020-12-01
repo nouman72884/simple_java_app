@@ -56,7 +56,7 @@ pipeline {
             spec: """{
                 "files": [
                     {
-                    "pattern": "docker-virtual/my-app-1.0-SNAPSHOT.jar",
+                    "pattern": "docker-eurus/my-app-1.0-SNAPSHOT.jar",
                     "target": "app/"
                     }
                 ]
