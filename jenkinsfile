@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Example') {
             steps {
-                httpRequest acceptType: application/json, contentType: application/json, customHeaders: [[maskValue: false, name: '', value: '']], httpMode: 'POST', requestBody: '''{
+                httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', responseHandle: 'STRING', customHeaders: [[maskValue: false, name: '', value: '']], httpMode: 'POST', requestBody: '''{
                 "request_batch_size": "${params.request_batch_size}",
                 "request_process_time": "${params.request_process_time}",
                 "athena_table_name": "${params.athena_table_name}",
