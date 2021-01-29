@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+    parameters {
+    string(name: 'api_url', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
+    string(name: 'request_batch_size', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
+    string(name: 'request_process_time', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
+    string(name: 'athena_table_name', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
+    string(name: 'athena_database_name', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
+    string(name: 'athena_output_bucket_url', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
+    string(name: 'elb_logs_bucket_url', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
+    string(name: 'aws_default_region', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
+
+}
+    stages {
+        stage('Example') {
+            steps {
+                httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', customHeaders: [[maskValue: false, name: '', value: '']], httpMode: 'POST', requestBody: '''{
+                "request_batch_size": "${params.request_batch_size}",
+                "request_process_time": "${params.request_process_time}",
+                "athena_table_name": "${params.athena_table_name}",
+                "athena_database_name": "${params.athena_database_name}",
+                "athena_output_bucket_url": "${params.athena_output_bucket_url}",
+                "elb_logs_bucket_url": "s3://extendtv-logs/AWSLogs/681420559112/elasticloadbalancing/us-east-1/2020/12/11/",
+                "aws_default_region": "${params.aws_default_region}"
+            } ''', responseHandle: 'NONE', url: '${params.api_url}', wrapAsMultipart: false
+                }    
+            }
+        }
+    }
+}
