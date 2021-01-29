@@ -22,7 +22,7 @@ pipeline {
                 "athena_output_bucket_url": "${params.athena_output_bucket_url}",
                 "elb_logs_bucket_url": "s3://extendtv-logs/AWSLogs/681420559112/elasticloadbalancing/us-east-1/2020/12/11/",
                 "aws_default_region": "${params.aws_default_region}"
-            } ''', responseHandle: 'NONE', url: '${params.api_url}', wrapAsMultipart: false
+            } ''', responseHandle: 'NONE', url: "${params.api_url}", wrapAsMultipart: false
                 }    
             }
         }
