@@ -10,7 +10,7 @@ pipeline {
     string(name: 'elb_logs_bucket_url', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
     string(name: 'aws_default_region', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
 
-}
+ }
     stages {
         stage('Example') {
             steps {
@@ -26,5 +26,4 @@ pipeline {
                 }    
             }
         }
-    }
 }
