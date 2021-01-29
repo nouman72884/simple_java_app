@@ -1,28 +1,28 @@
 pipeline {
     agent any
     parameters {
-    string(name: 'api_url', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
-    string(name: 'request_batch_size', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
-    string(name: 'request_process_time', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
-    string(name: 'athena_table_name', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
-    string(name: 'athena_database_name', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
-    string(name: 'athena_output_bucket_url', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
-    string(name: 'elb_logs_bucket_url', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
-    string(name: 'aws_default_region', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Suite File')
+    string(name: 'api_url', defaultValue: 'https://8uvgdnkv3l.execute-api.us-east-1.amazonaws.com/test/run-ecs-task', description: 'Api URl to be Requested')
+    string(name: 'request_batch_size', defaultValue: '900', description: 'Batch Size to be process. Must be integer value e.g 900')
+    string(name: 'request_process_time', defaultValue: '60', description: 'Time in which a batch will process. it will take value in seconds e.g 60')
+    string(name: 'athena_database_name', defaultValue: 'athena_database', description: 'Athena database name to store logs e.g mydatabase')    
+    string(name: 'athena_table_name', defaultValue: 'athena_table', description: 'Athena table name e.g logs_table')
+    string(name: 'athena_output_bucket_url', defaultValue: 's3://test-bucket/queries/', description: 'bucket url to store athena query results e.g s3://test-bucket/queries/')
+    string(name: 'elb_logs_bucket_url', defaultValue: 's3://extendtv-logs/AWSLogs/681420559112/elasticloadbalancing/us-east-1/2020/12/11/', description: 'Bucket url where logs are stored e.g s3://extendtv-logs/AWSLogs/681420559112/elasticloadbalancing/us-east-1/2020/12/11/')
+    string(name: 'aws_default_region', defaultValue: 'us-east-1', description: 'aws default region e.g us-east-1')
 
  }
     stages {
         stage('Example') {
             steps {
-                httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', customHeaders: [[maskValue: false, name: '', value: '']], httpMode: 'POST', requestBody: '''{
+                httpRequest acceptType: 'application/json', contentType: 'application/json', customHeaders: [[maskValue: false, name: '', value: '']], httpMode: 'POST', requestBody: '''{
                 "request_batch_size": "${params.request_batch_size}",
                 "request_process_time": "${params.request_process_time}",
                 "athena_table_name": "${params.athena_table_name}",
                 "athena_database_name": "${params.athena_database_name}",
                 "athena_output_bucket_url": "${params.athena_output_bucket_url}",
-                "elb_logs_bucket_url": "s3://extendtv-logs/AWSLogs/681420559112/elasticloadbalancing/us-east-1/2020/12/11/",
+                "elb_logs_bucket_url": "${params.elb_logs_bucket_url}",
                 "aws_default_region": "${params.aws_default_region}"
-            } ''', responseHandle: 'NONE', url: "${params.api_url}", wrapAsMultipart: false
+            } ''', responseHandle: 'NONE', url: "${params.api_url}", validResponseContent: 'job successfully completed' , wrapAsMultipart: false
                 }    
             }
         }
