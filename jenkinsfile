@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Example') {
             steps {
-                httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', responseHandle: 'STRING', customHeaders: [[maskValue: false, name: '', value: '']], httpMode: 'POST', requestBody: '''{
+                httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', customHeaders: [[maskValue: false, name: '', value: '']], httpMode: 'POST', requestBody: '''{
                 "request_batch_size": "${params.request_batch_size}",
                 "request_process_time": "${params.request_process_time}",
                 "athena_table_name": "${params.athena_table_name}",
@@ -22,7 +22,7 @@ pipeline {
                 "athena_output_bucket_url": "${params.athena_output_bucket_url}",
                 "elb_logs_bucket_url": "${params.elb_logs_bucket_url}",
                 "aws_default_region": "${params.aws_default_region}"
-            } ''', responseHandle: 'NONE', url: "${params.api_url}", validResponseContent: 'job successfully completed' , wrapAsMultipart: false
+            } ''', responseHandle: 'STRING', url: "${params.api_url}", validResponseContent: 'job successfully completed' , wrapAsMultipart: false
                 }    
             }
         }
