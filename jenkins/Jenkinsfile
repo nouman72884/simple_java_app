@@ -31,7 +31,7 @@ pipeline {
                 sh 'ls target/'
             }
         }
-        stage ('Publish Artifacts') {
+      /*  stage ('Publish Artifacts') {
         steps {
             rtUpload (
                 buildName: JOB_NAME,
@@ -48,8 +48,8 @@ pipeline {
                     }"""   
                 )
         }
-    }
-        stage ('pull artifact') {
+    } */
+       /* stage ('pull artifact') {
         steps{
             rtDownload (
             serverId: "jenkins-artifactory",
@@ -63,6 +63,6 @@ pipeline {
             }"""
         )
         }
-    }
+    } */
  }
 }
